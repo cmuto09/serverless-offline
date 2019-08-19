@@ -405,7 +405,9 @@ module.exports = class ApiGateway {
       }
 
       // Payload processing
-      const encoding = detectEncoding(request)
+      const encoding =
+        detectEncoding(request, this._options.base64EncodedContentTypes) ||
+        undefined
 
       request.payload = request.payload && request.payload.toString(encoding)
       request.rawPayload = request.payload
@@ -529,6 +531,7 @@ module.exports = class ApiGateway {
         const lambdaProxyIntegrationEvent = new LambdaProxyIntegrationEvent(
           request,
           this._provider.stage,
+          encoding && encoding === 'base64',
         )
 
         event = lambdaProxyIntegrationEvent.create()
