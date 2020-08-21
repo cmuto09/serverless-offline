@@ -57,7 +57,7 @@ describe('utils', () => {
             'content-type': 'multipart/form-data',
           },
         };
-        expect(detectEncoding(request)).toEqual('binary');
+        expect(detectEncoding(request, ['*/*'])).toEqual('base64');
       });
     });
 
