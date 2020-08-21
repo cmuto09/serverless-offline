@@ -59,9 +59,6 @@ exports.detectEncoding = function detectEncoding(
   if (typeof request.headers['content-type'] !== 'string') {
     return false;
   }
-  if (request.headers['content-type'].includes('multipart/form-data')) {
-    return 'binary';
-  }
   if (
     base64EncodedContentTypes.some((contentType) =>
       request.headers['content-type'].includes(contentType),
